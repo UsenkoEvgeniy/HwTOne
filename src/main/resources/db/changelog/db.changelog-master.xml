@@ -14,4 +14,14 @@ http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
         <rollback/>
     </changeSet>
 
+    <changeSet id="add-tables" author="EUsenko">
+        <sqlFile encoding="utf8" path="/db/changelog/2024.11/04-01-changelog-03.sql"/>
+        <rollback/>
+    </changeSet>
+
+    <changeSet id="fill-data" author="EUsenko">
+        <sqlFile encoding="utf8" path="/db/changelog/2024.11/04-01-changelog-04.sql"/>
+        <rollback/>
+    </changeSet>
+
 </databaseChangeLog>
