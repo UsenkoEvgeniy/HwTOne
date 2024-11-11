@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.t1.java.demo.model.AccountType;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
@@ -14,7 +15,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AccountDto {
+public class AccountDto implements Serializable {
     private Long id;
     private Long clientId;
     private AccountType accountType;

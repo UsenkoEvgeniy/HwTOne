@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -14,7 +15,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TransactionDto {
+public class TransactionDto implements Serializable {
     private Long id;
     private Long accountId;
     private BigDecimal amount;
