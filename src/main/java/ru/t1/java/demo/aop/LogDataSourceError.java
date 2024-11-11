@@ -6,8 +6,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import ru.t1.java.demo.kafka.KafkaMetricsProducer;
 import ru.t1.java.demo.model.DataSourceErrorLog;
-import ru.t1.java.demo.repository.DataSourceErrorLogRepository;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,7 +18,7 @@ import java.io.StringWriter;
 @Slf4j
 public class LogDataSourceError {
 
-    private final DataSourceErrorLogRepository dataSourceErrorLogRepository;
+    private final KafkaMetricsProducer kafkaLogProducer;
 
     @AfterThrowing(pointcut = "execution(* ru.t1.java.demo.service..*(..))", throwing = "ex")
     public void logDatasourceError(JoinPoint joinPoint, Throwable ex) {
@@ -31,6 +31,6 @@ public class LogDataSourceError {
                 .stackTrace(sw.toString())
                 .methodSignature(joinPoint.getSignature().toString())
                 .build();
-        dataSourceErrorLogRepository.save(logEntry);
+        kafkaLogProducer.sendLog(logEntry);
     }
 }
